@@ -1,25 +1,40 @@
-name: Docker Image CI
+name: Docker publish
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - master
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Login Dockerhub
-      env:
-        DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
-        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-      run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      - name: Checkout código
+        uses: actions/checkout@v2
+  
+      - name: Iniciar Docker
+        run: docker info
+  
+      - name: Login en Docker Hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+  
+      - name: Build de la imagen de Docker
+        run: docker build -t cesardw/cicd-pipeline:latest .
+  
+      - name: Push de la imagen a Docker Hub
+        run: docker push cesardw/cicd-pipeline:latest
+          
+    #steps:
+    #- uses: actions/checkout@v3
+    #- name: Login Dockerhub
+      #env:
+        #DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+        #DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      #run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
     
-    - name: Build the Docker image
-      run: docker build -t cicd-pipeline .
-    - name: Push to Dockerhub
-      run: docker push cesardw/cicd-pipeline:latest
+    #- name: Build the Docker image
+      #run: docker build -t cicd-pipeline .
+    #- name: Push to Dockerhub
+      #run: docker push cesardw/cicd-pipeline:latest
       
