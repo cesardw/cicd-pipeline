@@ -1,4 +1,4 @@
-name: Docker publish
+name: CI Pipeline
 
 on:
   push:
@@ -20,7 +20,7 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
   
       - name: Build de la imagen de Docker
-        run: docker build -t cesardw/cicd-pipeline:latest .
+        run: docker build -t cesardw/cicd-pipeline .
   
       - name: Push de la imagen a Docker Hub
         run: docker push cesardw/cicd-pipeline:latest
