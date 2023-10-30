@@ -12,12 +12,12 @@ jobs:
     
     steps:  
       - name: Extraer Imagen Docker
-        run: sudo docker pull cesardw/cicd-pipeline:latest
+        run: sudo docker pull cesardw/cicd-pipeline:latest time.sleep(200)
   
       - name: Borrar Imagen Vieja
-        run: sudo docker rm -f cicd-pipeline-contenedor || true
+        run: sudo docker rm -f /cicd-pipeline-contenedor || true
   
       - name: Arrancar el Contenedor de Docker
-        run: sudo docker run -d -p 8080:8080 --name cicd-pipeline-contenedor cesardw/cicd-pipeline
+        run: sudo docker run -d -p 8080:8080 --name /cicd-pipeline-contenedor cesardw/cicd-pipeline
 
         #self-hosted
