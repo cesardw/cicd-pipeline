@@ -25,15 +25,15 @@ jobs:
       - name: Push de la imagen a Docker Hub
         run: docker push cesardw/cicd-pipeline:latest
 
-      - name: Conectar por SSH al host
-        run: |
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H $HOST >> ~/.ssh/Know_hosts
-          ssh -T usuario@HOST
-        env:
-          HOST: ${{ secrets.HOST }}
-          SSH_PROVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      #- name: Conectar por SSH al host
+        #run: |
+          #echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          #chmod 600 ~/.ssh/id_rsa
+          #ssh-keyscan -H $HOST >> ~/.ssh/Know_hosts
+          #ssh -T usuario@HOST
+        #env:
+          #HOST: ${{ secrets.HOST }}
+          #SSH_PROVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           
     #steps:
     #- uses: actions/checkout@v3
