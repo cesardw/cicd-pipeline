@@ -30,7 +30,7 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ~/root/.ssh/id_rsa
           chmod 600 ~/root/.ssh/id_rsa
           ssh-keyscan -H $HOST >> ~/root/.ssh/Know_hosts
-          ssh -T usuario@HOST
+          ssh -T ubuntu@HOST
         env:
           HOST: ${{ secrets.SSH_HOST }}
           SSH_PROVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
