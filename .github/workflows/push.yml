@@ -27,9 +27,7 @@ jobs:
 
       - name: Conectar por SSH al host
         run: |
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H $SSH_HOST >> ~/.ssh/Know_hosts
           ssh -T usuario@HOST
         env:
           HOST: ${{ secrets.SSH_HOST }}
