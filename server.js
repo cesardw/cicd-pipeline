@@ -6,7 +6,7 @@ const app = express()
 app.get('/', (req, res) => {
     res.json({
         status: 200,
-        message: "DevOps en proceso, sale o sale 3.0"
+        message: "Toca SSH"
     })
 })
 
