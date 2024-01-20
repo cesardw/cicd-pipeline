@@ -14,7 +14,7 @@ jobs:
       - name: Extraer Imagen Docker
         run: sudo docker pull cesardw/cicd-pipeline:latest
   
-      - name: Borrar Imagen Vieja
+      - name: Borrar Imagen Viejas
         run: sudo docker rm -f /cicd-pipeline-contenedor || true
   
       - name: Arrancar el Contenedor de Docker
