@@ -8,13 +8,13 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: [ubuntu-latest]
     
     steps:  
       - name: Extraer Imagen Docker
         run: sudo docker pull cesardw/cicd-pipeline:latest
   
-      - name: Borrar Imagen Viejas
+      - name: Borrar Imagen Vieja
         run: sudo docker rm -f /cicd-pipeline-contenedor || true
   
       - name: Arrancar el Contenedor de Docker
