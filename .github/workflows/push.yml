@@ -21,12 +21,12 @@ jobs:
 
       - name: Configure SSH
         run: 
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/authorized_keys
-          chmod 600 ~/.ssh/authorized_keys
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > /home/runner/.ssh/authorized_keys
+          chmod 600 /home/runner/.ssh/authorized_keys
   
       - name: Connect to AWS Instance
         run: 
-          ssh -i ~/.ssh/authorized_keys ubuntu@ec2-54-175-78-194.compute-1.amazonaws.com
+          ssh -i /home/runner/.ssh/authorized_keys ubuntu@ec2-54-175-78-194.compute-1.amazonaws.com
   
       - name: Build de la imagen de Dockers
         run: docker build -t cesardw/cicd-pipeline .
