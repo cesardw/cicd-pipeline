@@ -18,22 +18,38 @@ jobs:
   
       - name: Login en Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Configure SSH
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+  
+      - name: Connect to AWS Instance
+        run: |
+          ssh -i ~/.ssh/id_rsa ubuntu@ec2-54-175-78-194.compute-1.amazonaws.com
   
       - name: Build de la imagen de Dockers
         run: docker build -t cesardw/cicd-pipeline .
   
       - name: Push de la imagen a Docker Hubs
         run: docker push cesardw/cicd-pipeline:latest
+
+      #- name: Set up AWS CLI
+        #uses: aws-actions/configure-aws-credentials@v2
+        #with:
+          #aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          #aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          #aws-region: us-east-1b
         
-      - name: Conectar por SSH al host
-        run: |
-          echo "$SSH_PRIVATE_KEY" > ~/root/.ssh/id_rsa
-          chmod 600 ~/root/.ssh/id_rsa
-          ssh-keyscan -H $HOST >> ~/root/.ssh/Know_hosts
-          ssh -T ubuntu@HOST
-        env:
-          HOST: ${{ secrets.SSH_HOST }}
-          SSH_PROVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      # name: Conectar por SSH al host
+        #run: |
+          #echo "$SSH_PRIVATE_KEY" > ~/root/.ssh/id_rsa
+          #chmod 600 ~/root/.ssh/id_rsa
+          #ssh-keyscan -H $HOST >> ~/root/.ssh/Know_hosts
+          #ssh -T ubuntu@HOST
+        #env:
+          #HOST: ${{ secrets.SSH_HOST }}
+          #SSH_PROVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
     #steps:
     #- uses: actions/checkout@v3
@@ -47,4 +63,3 @@ jobs:
       #run: docker build -t cicd-pipeline .
     #- name: Push to Dockerhub
       #run: docker push cesardw/cicd-pipeline:latest
-      
