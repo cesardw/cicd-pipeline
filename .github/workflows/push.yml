@@ -20,13 +20,14 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Configure SSH
-        run: 
+        run: |
+          mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
   
-      - name: Connect to AWS Instance
-        run: 
-          ssh -i ~/.ssh/id_rsa ubuntu@ec2-54-175-78-194.compute-1.amazonaws.com
+      #- name: Connect to AWS Instance
+        #run: |
+          #ssh -i /home/cesar/Descargas/cicd-pipeline2.pem ubuntu@ec2-54-175-78-194.compute-1.amazonaws.com
   
       - name: Build de la imagen de Dockers
         run: docker build -t cesardw/cicd-pipeline .
