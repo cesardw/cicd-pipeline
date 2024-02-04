@@ -27,6 +27,7 @@ jobs:
           #chmod 600 ~/.ssh/id_rsa
   
       - name: Connect to AWS Instanc
+        shell: bash
         run: |
           mkdir ~/.ssh
           echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
