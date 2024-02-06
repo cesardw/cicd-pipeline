@@ -32,9 +32,10 @@ jobs:
           mkdir ~/.ssh
           echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
           sudo chmod 600 ~/.ssh/known_hosts
-          ssh -i cicd-pipeline2.pem ubuntu@ec2-54-175-78-194.compute-1.amazonaws.com
+          ssh -v -i cicd-pipeline2.pem ubuntu@ec2-54-175-78-194.compute-1.amazonaws.com
         env:
           SSH_KNOWN_HOSTS: ec2-54-175-78-194.compute-1.amazonaws.com
+
       - name: Build de la imagen de Dockers
         run: docker build -t cesardw/cicd-pipeline .
   
