@@ -36,10 +36,11 @@ jobs:
         run: |
           mkdir ~/.ssh
           echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-          sudo chmod 700 ~/.ssh/known_hosts
-          ssh -v -i cicd-pipeline2.pem ubuntu@ec2-54-175-78-194.compute-1.amazonaws.com
           UserKnownHostsFile ~/.ssh/known_hosts
           GlobalKnownHostsFile /dev/null
+          sudo chmod 600 ~/.ssh/known_hosts
+          ssh -v -i cicd-pipeline2.pem ubuntu@ec2-54-175-78-194.compute-1.amazonaws.com
+
         env:
           SSH_KNOWN_HOSTS: ec2-54-175-78-194.compute-1.amazonaws.com
 
