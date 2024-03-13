@@ -1,0 +1,8 @@
+version: '3.7'
+
+services:
+  proxy:
+    image: cesar/cicd-pipeline
+    command:
+      - '--providers.docker=true'
+      - '--entryPoints.web.address=:8080'
