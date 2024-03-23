@@ -28,7 +28,7 @@ jobs:
 
       - name: Update known_hosts
         run: |
-          ssh-keyscan -H ec2-54-175-78-194.compute-1.amazonaws.com >> ~/.ssh/known_hosts
+          ssh-keyscan -H ec2-54-208-243-8.compute-1.amazonaws.com >> ~/.ssh/known_hosts
 
   
       #- name: Connect to AWS Instanc
